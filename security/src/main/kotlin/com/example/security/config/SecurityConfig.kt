@@ -31,10 +31,9 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
         web.ignoring().antMatchers("/resource/**", "/static/**", "/favicon.ico")
     }
 
-    //어떠한 URL 경로를 보호해야 하는지에 대해 정의하거나 자신만의 인증 매커니즘을 정의한다.
+    // 어떠한 URL 경로를 보호해야 하는지에 대해 정의하거나 자신만의 인증 매커니즘을 정의한다.
     override fun configure(http: HttpSecurity) {
-//        http.csrf().disable().httpBasic()
-        http.csrf().disable()
+        http.csrf().disable().httpBasic()
         http.headers().frameOptions().disable()
 
         http.authorizeRequests()
