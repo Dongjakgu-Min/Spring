@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+<head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+</head>
+<body>
+<span sec:authorize="hasRole('ROLE_ADMIN')">
+        <button>
+            <a href="/logout"><h2>ADMIN Logout</h2></a>
+        </button>
+    </span>
+<span sec:authorize="hasRole('ROLE_USER')">
+        <button>
+            <a href="/logout"><h2>USER Logout</h2></a>
+        </button>
+    </span>
+</body>
+</html>
