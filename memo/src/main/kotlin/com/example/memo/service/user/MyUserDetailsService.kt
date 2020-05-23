@@ -18,6 +18,6 @@ class MyUserDetailsService(
         val user: User? = userRepository.findByUsername(username)
         user?: throw UsernameNotFoundException("cannot find such username: $username")
 
-        return MyUserDetails(user.id, user.password, "ADMIN", user.username)
+        return MyUserDetails(user.id, user.password, user.role, user.username)
     }
 }

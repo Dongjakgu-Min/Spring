@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Component
 import java.util.*
-import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 
 @Component
@@ -26,6 +25,7 @@ class JwtTokenProvider(
 
     fun createToken(username: String, roles: List<String>): String {
         val claims: Claims = Jwts.claims().setSubject(username)
+        // Payload(내용)에 담는 정보의 한 조각을 Claim 이라 부른다.
         claims["roles"] = roles
 
         val validity = Date(Date().time + validityInMilliseconds)
@@ -58,6 +58,7 @@ class JwtTokenProvider(
     fun validateToken(token: String): Boolean {
         try {
             val claims: Jws<Claims> = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token)
+            //  JWS는 서버에서 인증을 증거로 인증 정보를 서버의 private key로 서명한 것을 Token화 한 것이다.
             if (claims.body.expiration.before(Date())) return false
             return true
         } catch (e: Exception) {

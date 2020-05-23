@@ -23,10 +23,10 @@ class WebSecurityConfig @Autowired constructor(
         @Autowired private val userDetailsService: MyUserDetailsService,
         @Autowired private val bCryptPasswordEncoder: BCryptPasswordEncoder
 ) : WebSecurityConfigurerAdapter() {
-    @Bean
-    fun passwordEncoder(): PasswordEncoder {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder()
-    }
+//    @Bean
+//    fun passwordEncoder(): PasswordEncoder {
+//        return PasswordEncoderFactories.createDelegatingPasswordEncoder()
+//    }
 
     @Bean
     override fun authenticationManagerBean(): AuthenticationManager {
@@ -36,13 +36,16 @@ class WebSecurityConfig @Autowired constructor(
     override fun configure(http: HttpSecurity) {
         http.httpBasic().disable()
                 .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests()
-                .antMatchers("/api/admin/**").hasRole("ADMIN")
-                .antMatchers("/**").permitAll()
-                .antMatchers("/api/user/**").permitAll()
-                .antMatchers("/api/memo/").permitAll()
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
+                .antMatcher("/api/**").authorizeRequests()
+                .antMatchers("/api/user/register").anonymous()
+                .antMatchers("/api/user/login").anonymous()
+//                .authorizeRequests()
+//                .antMatchers("/api/user/admin/**").hasRole("ADMIN")
+//                .antMatchers("/**").permitAll()
+//                .antMatchers("/api/user/**").hasRole("USER")
+//                .antMatchers("/api/memo/").permitAll()
                 .and()
                 .apply(JwtConfig(jwtTokenProvider))
     }
