@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.*
 class AccountController (
         private val accountService: AccountService
 ) {
+    @GetMapping("/")
+    fun findAll() = accountService.findAll()
+
     @GetMapping("/username/{username}")
     fun findAllByUsername(@PathVariable username: String) = accountService.findAllByUsername(username)
 
-    @PostMapping("/create/")
+    @PostMapping("/create")
     fun createAccount(@RequestBody account: AccountDto) = accountService.createAccount(account)
 
     @GetMapping("/phone/{phoneNumber}")

@@ -17,4 +17,5 @@ class AccountService @Autowired constructor(
     fun getOne(accountId: Long) : Mono<Account> = repository.getOne(accountId)
     fun findAllByUsername(username: String): Flux<Account> = repository.findAllByUsername(username)
     fun findAllByPhoneNumber(phoneNumber: String): Flux<Account> = repository.findAllByPhoneNumber(phoneNumber)
+    fun findAll(): Flux<Account> = repository.findAll()
 }

@@ -10,4 +10,5 @@ interface AccountRxRepository {
 
     fun findAllByUsername(username: String): Flux<Account>
     fun findAllByPhoneNumber(phoneNumber: String): Flux<Account>
+    fun findAll(): Flux<Account>
 }

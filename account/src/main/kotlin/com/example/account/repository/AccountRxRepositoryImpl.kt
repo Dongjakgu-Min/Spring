@@ -32,4 +32,10 @@ class AccountRxRepositoryImpl @Autowired constructor(
                 .subscribeOn(Schedulers.elastic())
                 .flatMapMany { Flux.fromIterable(it) }
     }
+
+    override fun findAll(): Flux<Account> {
+        return Mono.fromCallable { accountRepository.findAll() }
+                .subscribeOn(Schedulers.elastic())
+                .flatMapMany { Flux.fromIterable(it) }
+    }
 }

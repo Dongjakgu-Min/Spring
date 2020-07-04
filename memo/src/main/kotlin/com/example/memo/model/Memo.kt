@@ -4,19 +4,19 @@ import java.util.*
 import javax.persistence.*
 
 @Entity
-data class Memo(
+class Memo(
         @Id @GeneratedValue
         val id: Long? = null,
-        @Column(nullable = false)
+        @Column(name = "username", nullable = false)
+        var username: String,
+        @Column(name = "title", nullable = false)
         var title: String,
-        @Column
+        @Column(name = "content", nullable = false)
         var content: String,
-        @Column
-        var tag: String,
-        @Column(nullable = false)
-        var isOpen: Boolean = true,
-        @Column
-        var createdAt: Date = Date(System.currentTimeMillis()),
-        @ManyToOne
-        val author: User
+        @Column(name = "is_public", nullable = false)
+        var isPublic: Boolean,
+        @Column(name = "tag")
+        var tag: String?,
+        @Column(name = "created_at")
+        var createdAt: Date? = Date(System.currentTimeMillis())
 )
