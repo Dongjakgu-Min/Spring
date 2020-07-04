@@ -1,17 +1,11 @@
 package com.example.memo.controller
 
 import com.example.memo.dto.MemoDto
-import com.example.memo.repository.MemoRepository
 import com.example.memo.service.MemoService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.repository.query.Param
-import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.*
 
-@Controller
+@RestController
 class MemoController @Autowired constructor(
         val memoService: MemoService
 ) {
