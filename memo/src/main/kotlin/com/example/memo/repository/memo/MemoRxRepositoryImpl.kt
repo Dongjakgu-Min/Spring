@@ -1,8 +1,9 @@
-package com.example.memo.repository
+package com.example.memo.repository.memo
 
 import com.example.memo.model.Memo
+import com.example.memo.repository.memo.MemoRepository
+import com.example.memo.repository.memo.MemoRxRepository
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.scheduling.annotation.Schedules
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono

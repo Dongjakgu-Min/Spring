@@ -1,4 +1,4 @@
-package com.example.memo.repository
+package com.example.memo.repository.memo
 
 import com.example.memo.model.Memo
 import org.springframework.data.jpa.repository.JpaRepository

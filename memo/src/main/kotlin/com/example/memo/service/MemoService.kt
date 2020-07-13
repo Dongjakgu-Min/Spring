@@ -2,7 +2,7 @@ package com.example.memo.service
 
 import com.example.memo.dto.MemoDto
 import com.example.memo.model.Memo
-import com.example.memo.repository.MemoRxRepository
+import com.example.memo.repository.memo.MemoRxRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux

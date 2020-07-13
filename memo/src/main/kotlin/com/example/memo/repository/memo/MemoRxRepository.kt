@@ -1,4 +1,4 @@
-package com.example.memo.repository
+package com.example.memo.repository.memo
 
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono

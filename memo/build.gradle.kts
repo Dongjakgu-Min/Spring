@@ -25,18 +25,24 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
-//	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.boot:spring-boot-starter-security")
+
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+
+	implementation("io.jsonwebtoken:jjwt:0.9.1")
+
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("mysql:mysql-connector-java")
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
 	testImplementation("org.springframework.security:spring-security-test")
+	testImplementation("io.projectreactor:reactor-test")
 }
 
 tasks.withType<Test> {
