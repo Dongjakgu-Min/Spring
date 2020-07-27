@@ -11,5 +11,7 @@ class User(
         @Column(name = "password")
         var password: String,
         @Column(name = "is_active")
-        var isActive: Boolean
+        var isActive: Boolean,
+        @Column(name = "role")
+        var role: String
 )
