@@ -37,12 +37,6 @@ class AuthService @Autowired constructor(
     }
 
     fun login(userDto: UserDto): Mono<String> {
-//        val user: User = userRepository.findByUsername(userDto.username)
-//        if (!passwordEncoder.matches(userDto.password, user.password)) {
-//            throw Exception()
-//        }
-//
-//        return jwtTokenProvider.createToken(user.username, listOf(user.role))
         return userRxRepository.findByUsername(userDto.username)
                 .flatMap {
                     if (!passwordEncoder.matches(userDto.password, it.password))
