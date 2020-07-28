@@ -1,6 +1,8 @@
 package com.example.memo.service
 
 import com.example.memo.dto.UserDto
+import com.example.memo.exception.InvalidUserDataException
+import com.example.memo.exception.UserAlreadyExistException
 import com.example.memo.model.User
 import com.example.memo.repository.user.UserRepository
 import com.example.memo.repository.user.UserRxRepository
@@ -21,7 +23,7 @@ class AuthService @Autowired constructor(
     fun signUp(userDto: UserDto): Mono<Unit> {
         return userRxRepository.existByUsername(userDto.username)
                 .flatMap {
-                    if (it) Mono.error(Exception())
+                    if (it) Mono.error(UserAlreadyExistException())
                     else Mono.just(userDto.username)
                 }
                 .map {
@@ -40,7 +42,7 @@ class AuthService @Autowired constructor(
         return userRxRepository.findByUsername(userDto.username)
                 .flatMap {
                     if (!passwordEncoder.matches(userDto.password, it.password))
-                        throw Exception()
+                        Mono.error(InvalidUserDataException())
                     else Mono.just(it)
                 }
                 .map {
