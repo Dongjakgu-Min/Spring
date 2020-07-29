@@ -1,5 +1,6 @@
 package com.example.memo.repository.user
 
+import com.example.memo.model.Memo
 import com.example.memo.model.User
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
@@ -13,5 +14,5 @@ interface UserRepository : JpaRepository<User, Long> {
     fun existsByUsernameAndIsActive(username: String, isActive: Boolean): Boolean
 
     fun findByUsername(username: String): User
-    fun findByUsernameAndIsActive(username: String, isActive: Boolean): Boolean
+    fun findByUsernameAndIsActive(username: String, isActive: Boolean): User
 }

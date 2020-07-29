@@ -13,14 +13,14 @@ class MemoController @Autowired constructor(
     fun findAll() = memoService.findAllMemo()
 
     @GetMapping("/memo/{id}")
-    fun findById(@PathVariable id: Long) = memoService.getOne(id)
-
-    @GetMapping("/username/{username}")
-    fun findByUsername(@PathVariable username: String) = memoService.findAllByUsername(username)
+    fun findById(@PathVariable id: Long) = memoService.getOneByIdIsNotDeleted(id)
 
     @GetMapping("/tag/{tag}")
     fun findByTag(@PathVariable tag: String) = memoService.findAllByTag(tag)
 
-    @PostMapping("/create")
+    @PostMapping("/memo/create")
     fun createMemo(@RequestBody memo: MemoDto) = memoService.createMemo(memo)
+
+    @GetMapping("/memo/username/{username}")
+    fun findByUsername(@PathVariable username: String) = memoService.findAllByUsername(username)
 }

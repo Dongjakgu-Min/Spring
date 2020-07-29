@@ -1,6 +1,7 @@
 package com.example.memo.repository.memo
 
 import com.example.memo.model.Memo
+import com.example.memo.model.User
 import com.example.memo.repository.memo.MemoRepository
 import com.example.memo.repository.memo.MemoRxRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -29,15 +30,20 @@ class MemoRxRepositoryImpl @Autowired constructor(
                 .flatMapMany { Flux.fromIterable(it) }
     }
 
-    override fun findAllByUsername(username: String): Flux<Memo> {
-        return Mono.fromCallable { memoRepository.findAllByUsername(username) }
-                .subscribeOn(Schedulers.elastic())
-                .flatMapMany { Flux.fromIterable(it) }
-    }
-
     override fun findAllByTag(tag: String?): Flux<Memo> {
         return Mono.fromCallable { memoRepository.findAllByTag(tag) }
                 .subscribeOn(Schedulers.elastic())
                 .flatMapMany { Flux.fromIterable(it) }
+    }
+
+    override fun findAllByUserAndIsDeleted(user: User, isDeleted: Boolean): Flux<Memo> {
+        return Mono.fromCallable { memoRepository.findAllByUserAndIsDeleted(user, isDeleted) }
+                .subscribeOn(Schedulers.elastic())
+                .flatMapMany { Flux.fromIterable(it) }
+    }
+
+    override fun existsByIdAndIsDeleted(memoId: Long, isDeleted: Boolean): Mono<Boolean> {
+        return Mono.fromCallable { memoRepository.existsByIdAndIsDeleted(memoId, isDeleted) }
+                .subscribeOn(Schedulers.elastic())
     }
 }

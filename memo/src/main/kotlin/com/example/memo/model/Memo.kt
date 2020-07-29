@@ -7,8 +7,8 @@ import javax.persistence.*
 class Memo(
         @Id @GeneratedValue
         val id: Long? = null,
-        @Column(name = "username", nullable = false)
-        var username: String,
+        @ManyToOne(fetch=FetchType.EAGER)
+        var user: User,
         @Column(name = "title", nullable = false)
         var title: String,
         @Column(name = "content", nullable = false)
@@ -18,5 +18,7 @@ class Memo(
         @Column(name = "tag")
         var tag: String?,
         @Column(name = "created_at")
-        var createdAt: Date? = Date(System.currentTimeMillis())
+        var createdAt: Date? = Date(System.currentTimeMillis()),
+        @Column(name = "is_deleted")
+        var isDeleted: Boolean = false
 )

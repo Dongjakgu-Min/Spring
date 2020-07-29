@@ -33,7 +33,7 @@ class WebSecurityConfig @Autowired constructor(
                 .and()
                 .authorizeRequests()
                 .antMatchers("/findAll").hasRole("ADMIN")
-                .antMatchers("/username/exist/*").hasRole("USER")
+                .antMatchers("/memo/create").hasRole("USER")
                 .anyRequest().permitAll()
                 .and()
                 .addFilterBefore(JwtAuthenticationFilter(jwtTokenProvider),
