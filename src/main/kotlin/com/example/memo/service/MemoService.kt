@@ -1,8 +1,8 @@
 package com.example.memo.service
 
 import com.example.memo.dto.MemoDto
+import com.example.memo.exception.InvalidUserDataException
 import com.example.memo.exception.MemoNotFoundException
-import com.example.memo.exception.UserNotFoundException
 import com.example.memo.model.Memo
 import com.example.memo.repository.memo.MemoRxRepository
 import com.example.memo.repository.user.UserRxRepository
@@ -59,14 +59,31 @@ class MemoService @Autowired constructor(
     }
 
     fun updateMemo(memoId: Long, updateMemo: MemoDto): Mono<Unit> {
+        val userDetails = SecurityContextHolder.getContext().authentication.principal as UserDetails
+
         return memoRxRepository.getOneIsDeleted(memoId)
                 .map {
+                    if (userDetails.username != it.user.username) throw InvalidUserDataException()
+
                     it.update(
                             title = updateMemo.title,
                             content = updateMemo.content,
                             isPublic = updateMemo.isPublic,
                             tag = updateMemo.tag
                     )
+                    it
+                }
+                .flatMap { memoRxRepository.save(it) }
+    }
+
+    fun removeMemo(memoId: Long): Mono<Unit> {
+        val userDetails = SecurityContextHolder.getContext().authentication.principal as UserDetails
+
+        return memoRxRepository.getOneIsDeleted(memoId)
+                .map {
+                    if (userDetails.username != it.user.username) throw InvalidUserDataException()
+
+                    it.remove(true)
                     it
                 }
                 .flatMap { memoRxRepository.save(it) }

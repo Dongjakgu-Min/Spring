@@ -1,6 +1,5 @@
 package com.example.memo.service
 
-import com.example.memo.dto.RoleDto
 import com.example.memo.dto.UserDto
 import com.example.memo.exception.InvalidUserDataException
 import com.example.memo.exception.UserAlreadyExistException
@@ -9,7 +8,6 @@ import com.example.memo.repository.user.UserRepository
 import com.example.memo.repository.user.UserRxRepository
 import com.example.memo.security.JwtTokenProvider
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono

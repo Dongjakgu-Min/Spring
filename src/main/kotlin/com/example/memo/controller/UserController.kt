@@ -1,6 +1,5 @@
 package com.example.memo.controller
 
-import com.example.memo.dto.RoleDto
 import com.example.memo.dto.UserDto
 import com.example.memo.repository.user.UserRepository
 import com.example.memo.repository.user.UserRxRepository
@@ -10,13 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @RestController
+@RequestMapping("/user/")
 class UserController @Autowired constructor(
         private val userRxRepository: UserRxRepository,
         private val userRepository: UserRepository,
         private val authService: AuthService,
         private val userService: UserService
 ) {
-    @GetMapping("/username/exist/{username}")
+    @GetMapping("/exist/{username}")
     fun existUser(@PathVariable username: String) = userRxRepository.existByUsername(username)
 
     @PostMapping("/signup")

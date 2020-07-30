@@ -28,4 +28,8 @@ class Memo(
                 this.isPublic = isPublic
                 this.tag = tag
         }
+
+        fun remove(isDeleted: Boolean) {
+                this.isDeleted = isDeleted
+        }
 }

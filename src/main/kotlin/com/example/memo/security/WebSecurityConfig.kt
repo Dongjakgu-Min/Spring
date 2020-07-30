@@ -17,7 +17,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 class WebSecurityConfig @Autowired constructor(
-        private val userRepository: UserRepository,
         private val jwtTokenProvider: JwtTokenProvider
 ) : WebSecurityConfigurerAdapter() {
     @Bean
