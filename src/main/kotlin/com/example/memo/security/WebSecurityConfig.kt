@@ -34,6 +34,7 @@ class WebSecurityConfig @Autowired constructor(
                 .authorizeRequests()
                 .antMatchers("/findAll").hasRole("ADMIN")
                 .antMatchers("/memo/create").hasRole("USER")
+                .antMatchers("/role/*").hasRole("USER")
                 .anyRequest().permitAll()
                 .and()
                 .addFilterBefore(JwtAuthenticationFilter(jwtTokenProvider),

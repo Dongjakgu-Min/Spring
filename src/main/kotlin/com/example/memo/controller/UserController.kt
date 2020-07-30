@@ -1,9 +1,11 @@
 package com.example.memo.controller
 
+import com.example.memo.dto.RoleDto
 import com.example.memo.dto.UserDto
 import com.example.memo.repository.user.UserRepository
 import com.example.memo.repository.user.UserRxRepository
 import com.example.memo.service.AuthService
+import com.example.memo.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
@@ -11,7 +13,8 @@ import org.springframework.web.bind.annotation.*
 class UserController @Autowired constructor(
         private val userRxRepository: UserRxRepository,
         private val userRepository: UserRepository,
-        private val authService: AuthService
+        private val authService: AuthService,
+        private val userService: UserService
 ) {
     @GetMapping("/username/exist/{username}")
     fun existUser(@PathVariable username: String) = userRxRepository.existByUsername(username)
@@ -24,4 +27,7 @@ class UserController @Autowired constructor(
 
     @GetMapping("/findAll")
     fun findAll() = userRepository.findAll()
+
+    @GetMapping("/role/{username}/change")
+    fun changeRole(@PathVariable username: String) = userService.changeRole(username)
 }

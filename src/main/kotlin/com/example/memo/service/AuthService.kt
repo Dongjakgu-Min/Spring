@@ -1,5 +1,6 @@
 package com.example.memo.service
 
+import com.example.memo.dto.RoleDto
 import com.example.memo.dto.UserDto
 import com.example.memo.exception.InvalidUserDataException
 import com.example.memo.exception.UserAlreadyExistException
