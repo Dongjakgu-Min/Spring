@@ -33,6 +33,7 @@ class WebSecurityConfig @Autowired constructor(
                 .authorizeRequests()
                 .antMatchers("/findAll").hasRole("ADMIN")
                 .antMatchers("/memo/create").hasRole("USER")
+                .antMatchers("/user/*/signout").hasRole("USER")
                 .antMatchers("/role/*").hasRole("USER")
                 .anyRequest().permitAll()
                 .and()

@@ -3,11 +3,14 @@ package com.example.memo.service
 import com.example.memo.dto.UserDto
 import com.example.memo.exception.InvalidUserDataException
 import com.example.memo.exception.UserAlreadyExistException
+import com.example.memo.exception.UserNotSameException
 import com.example.memo.model.User
 import com.example.memo.repository.user.UserRepository
 import com.example.memo.repository.user.UserRxRepository
 import com.example.memo.security.JwtTokenProvider
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
@@ -15,7 +18,6 @@ import reactor.core.publisher.Mono
 @Service
 class AuthService @Autowired constructor(
         private val userRxRepository: UserRxRepository,
-        private val userRepository: UserRepository,
         private val passwordEncoder: PasswordEncoder,
         private val jwtTokenProvider: JwtTokenProvider
 ) {
@@ -46,6 +48,20 @@ class AuthService @Autowired constructor(
                 }
                 .map {
                     jwtTokenProvider.createToken(it.username, listOf(it.role))
+                }
+    }
+
+    fun signOut(username: String): Mono<Unit> {
+        val userDetails = SecurityContextHolder.getContext().authentication.principal as UserDetails
+
+        return userRxRepository.findByUsername(username)
+                .flatMap {
+                    if (userDetails.username != username)
+                        Mono.error(UserNotSameException())
+                    else {
+                        it.isActive = false
+                        userRxRepository.save(it)
+                    }
                 }
     }
 }

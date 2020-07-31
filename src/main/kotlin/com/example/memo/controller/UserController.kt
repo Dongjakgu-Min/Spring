@@ -30,4 +30,7 @@ class UserController @Autowired constructor(
 
     @GetMapping("/role/{username}/change")
     fun changeRole(@PathVariable username: String) = userService.changeRole(username)
+
+    @GetMapping("/{username}/signout")
+    fun signout(@PathVariable username: String) = authService.signOut(username)
 }
