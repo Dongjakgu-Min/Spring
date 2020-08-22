@@ -9,13 +9,4 @@ import reactor.core.publisher.Mono
 class UserService @Autowired constructor(
         private val userRxRepository: UserRxRepository
 ) {
-    fun changeRole(username: String): Mono<Unit> {
-        return userRxRepository.findByUsernameAndIsActiveIfExist(username, true)
-                .map {
-                    if (it.role == "ROLE_USER") it.role = "ROLE_ADMIN"
-                    else it.role = "ROLE_USER"
-                    it
-                }
-                .flatMap { userRxRepository.save(it) }
-    }
 }

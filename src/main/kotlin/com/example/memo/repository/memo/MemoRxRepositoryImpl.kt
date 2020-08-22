@@ -51,6 +51,11 @@ class MemoRxRepositoryImpl @Autowired constructor(
                 .flatMapMany { Flux.fromIterable(it) }
     }
 
+    override fun findOneById(id: Long): Mono<Memo> {
+        return Mono.fromCallable { memoRepository.findOneById(id) }
+                .subscribeOn(Schedulers.elastic())
+    }
+
     override fun existsByIdAndIsDeleted(memoId: Long, isDeleted: Boolean): Mono<Boolean> {
         return Mono.fromCallable { memoRepository.existsByIdAndIsDeleted(memoId, isDeleted) }
                 .subscribeOn(Schedulers.elastic())

@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.*
 class UserController @Autowired constructor(
         private val userRxRepository: UserRxRepository,
         private val userRepository: UserRepository,
-        private val authService: AuthService,
-        private val userService: UserService
+        private val authService: AuthService
 ) {
     @GetMapping("/exist/{username}")
     fun existUser(@PathVariable username: String) = userRxRepository.existByUsername(username)
@@ -27,9 +26,6 @@ class UserController @Autowired constructor(
 
     @GetMapping("/findAll")
     fun findAll() = userRepository.findAll()
-
-    @GetMapping("/role/{username}/change")
-    fun changeRole(@PathVariable username: String) = userService.changeRole(username)
 
     @GetMapping("/{username}/signout")
     fun signout(@PathVariable username: String) = authService.signOut(username)

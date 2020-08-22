@@ -12,4 +12,6 @@ interface MemoRepository : JpaRepository<Memo, Long> {
 
     fun findAllByTag(tag: String?): List<Memo>
     fun findAllByUserAndIsDeleted(user: User, isDeleted: Boolean): List<Memo>
+
+    fun findOneById(id: Long): Memo
 }

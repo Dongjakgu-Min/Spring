@@ -31,7 +31,7 @@ class WebSecurityConfig @Autowired constructor(
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/findAll").hasRole("ADMIN")
+                .antMatchers("/admin/*").hasRole("ADMIN")
                 .antMatchers("/memo/create").hasRole("USER")
                 .antMatchers("/user/*/signout").hasRole("USER")
                 .antMatchers("/role/*").hasRole("USER")

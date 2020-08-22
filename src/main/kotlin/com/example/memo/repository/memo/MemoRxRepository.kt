@@ -16,4 +16,6 @@ interface MemoRxRepository {
     fun findAll(): Flux<Memo>
     fun findAllByTag(tag: String?): Flux<Memo>
     fun findAllByUserAndIsDeleted(user: User, isDeleted: Boolean): Flux<Memo>
+
+    fun findOneById(id: Long): Mono<Memo>
 }
